@@ -1,0 +1,1 @@
+//jest by default will go through your conplete sourse folder and look for files end with .test.ts and try to look for test there.
