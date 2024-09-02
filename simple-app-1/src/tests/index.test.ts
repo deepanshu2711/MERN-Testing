@@ -12,6 +12,8 @@ import {describe , expect ,it} from "@jest/globals"
 
 //to run all tests we need to use the command  , npm run test
 
+// we can have nested describe and it
+
 
 //describe is a function that takes a string and a function as arguments
 //there we describe that we will write all the tests for the sum function here
