@@ -29,7 +29,20 @@ describe("testing all routes", () => {
         a: 10,
         b: 20
       })
+      //we define that we need to spy on this specific mock
+      vi.spyOn(prisma.sum, "create")
       const res = await request(app).post('/sum').send({ a: 10, b: 20 })
+
+      //then after the function has succeed we can check 
+
+      expect(prisma.sum.create).toHaveBeenCalledWith({
+        data: {
+          a: 10,
+          b: 20,
+          result: 30
+        }
+      })
+      //expect(prisma.sum.create).toHaveBeenCalledOnce()
       expect(res.body.ans).toBe(30)
     })
 

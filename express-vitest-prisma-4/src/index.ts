@@ -12,7 +12,11 @@ app.post("/sum", async (req, res) => {
   const ans = a + b;
   //if we want id of this sum in responce and 
   //want to test it we can not get the id because this database call is mocked 
-  //
+  //we only test the outputs to the mocked functions by doing mockResolvedValue
+  //but what if we also want to test the inputs to the mocked request
+  //ie like if i change value of a as a+10 and then run the tests they will still succeed
+  //mock(mock let you mock the fuctionality of the function)
+  // to prevent this we use spys (it lets you spy on the function)
   const responce = await prisma.sum.create({
     data: {
       a, b, result: ans
