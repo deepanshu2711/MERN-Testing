@@ -1,0 +1,19 @@
+name: CI/CD for testing
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        working-directory: ./express-vitest-prisma-4
+        run: npm install && npx prisma generate
+      - name: Run tests 
+        working-directory: ./express-vitest-prisma-4
+        run: npm run test
