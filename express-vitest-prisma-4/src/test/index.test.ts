@@ -8,12 +8,14 @@ import request from "supertest";
 //we said that ../db.ts this file should export this 
 //vi.fn() this is an emply function
 //we want the prisma client that this file id exporting should be like this
-vi.mock("../db.ts", () => (
-  {
-    //object sum => create is an function inside it
-    prisma: { sum: { create: vi.fn(), findOne: vi.fn() } }
-  }
-))
+
+
+//the problem with this is that as your object become bigger you will have to add other things
+//like if we created a user object we need to mock its create, findone etc also which make this moke bigger 
+
+
+//to prevent this vitest let you do deep mocking
+vi.mock("../db.ts")
 
 
 describe("testing all routes", () => {

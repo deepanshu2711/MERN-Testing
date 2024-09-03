@@ -18,5 +18,8 @@
     "supertest": "^7.0.0",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
+  },
+  "devDependencies": {
+    "vitest-mock-extended": "^2.0.2"
   }
 }
