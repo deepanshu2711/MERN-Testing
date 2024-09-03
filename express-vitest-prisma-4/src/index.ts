@@ -10,15 +10,22 @@ app.post("/sum", async (req, res) => {
   const { a, b } = req.body;
 
   const ans = a + b;
-
-  await prisma.sum.create({
+  //if we want id of this sum in responce and 
+  //want to test it we can not get the id because this database call is mocked 
+  //
+  const responce = await prisma.sum.create({
     data: {
       a, b, result: ans
     }
   })
 
+  //during testing  = > 
+  //const res = vi.mock()  which return an empty function so we can not get id
+  //if we run this now during testing this will throw error or test case will fail
+  // => to provent this we also need to return a mocked return value
   res.json({
-    ans: ans
+    ans: ans,
+    id: responce.id
   })
 })
 

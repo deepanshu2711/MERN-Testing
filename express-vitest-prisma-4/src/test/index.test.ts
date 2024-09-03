@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { app } from "../index";
+import { prisma } from "../__mocks__/db";
 import request from "supertest";
 
 
@@ -11,7 +12,7 @@ import request from "supertest";
 
 
 //the problem with this is that as your object become bigger you will have to add other things
-//like if we created a user object we need to mock its create, findone etc also which make this moke bigger 
+//like if we created a user object we need to mock its create, finHdone etc also which make this moke bigger 
 
 
 //to prevent this vitest let you do deep mocking
@@ -21,6 +22,13 @@ vi.mock("../db.ts")
 describe("testing all routes", () => {
   describe("testing /sum routes", () => {
     it("should resturn sum of two numbers", async () => {
+      //now whenever prisma.sum.create would be called during testing it will return this mock value
+      prisma.sum.create.mockResolvedValue({
+        id: 1,
+        result: 3,
+        a: 10,
+        b: 20
+      })
       const res = await request(app).post('/sum').send({ a: 10, b: 20 })
       expect(res.body.ans).toBe(30)
     })
